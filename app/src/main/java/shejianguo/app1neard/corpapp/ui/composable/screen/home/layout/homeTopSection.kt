@@ -7,15 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import shejianguo.app1neard.corpapp.R
 import shejianguo.app1neard.corpapp.data.model.TipModel
-import shejianguo.app1neard.corpapp.ui.composable.screen.home.goalcard.WeeklyGoalCard
 import shejianguo.app1neard.corpapp.ui.composable.screen.home.greeting.HomeGreeting
 import shejianguo.app1neard.corpapp.ui.composable.screen.home.tips.TipCard
 import shejianguo.app1neard.corpapp.ui.theme.LocalDimens
 
 fun LazyListScope.homeTopSection(
     tips: List<TipModel>,
-    weeklyGoal: Int,
-    weeklyProgress: Int,
 ) {
     item {
         val dimens = LocalDimens.current
@@ -37,15 +34,5 @@ fun LazyListScope.homeTopSection(
                     .padding(horizontal = dimens.screenPadding),
             )
         }
-    }
-
-    item {
-        val dimens = LocalDimens.current
-        WeeklyGoalCard(
-            weeklyGoal = weeklyGoal,
-            completed = weeklyProgress,
-            modifier = Modifier
-                .padding(horizontal = dimens.screenPadding),
-        )
     }
 }

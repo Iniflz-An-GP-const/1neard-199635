@@ -4,6 +4,7 @@ import shejianguo.app1neard.corpapp.ui.viewmodel.HistoryViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.HomeViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.OnboardingViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.ProfileViewModel
+import shejianguo.app1neard.corpapp.ui.viewmodel.SettingsViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.SplashViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.StatisticsViewModel
 import shejianguo.app1neard.corpapp.ui.viewmodel.WorkoutViewModel
@@ -42,19 +43,28 @@ val viewModule = module {
 
     viewModel {
         HistoryViewModel(
-            workoutSessionRepository = get()
+            workoutSessionRepository = get(),
+            workoutRepository = get()
         )
     }
 
     viewModel {
         StatisticsViewModel(
-            workoutSessionRepository = get()
+            workoutSessionRepository = get(),
+            workoutRepository = get()
         )
     }
 
     viewModel {
         ProfileViewModel(
             profileRepository = get(),
+            workoutSessionRepository = get(),
+            workoutRepository = get()
+        )
+    }
+
+    viewModel {
+        SettingsViewModel(
             workoutSessionRepository = get()
         )
     }

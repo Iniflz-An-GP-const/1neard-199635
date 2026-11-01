@@ -86,6 +86,28 @@ class WorkoutViewModel(
         saveWorkoutSession()
     }
 
+    /** Saves the whole workout as completed, then calls [onSaved]. */
+    fun onMarkCompleted(onSaved: () -> Unit) {
+        val state = currentWorkout() ?: return
+        val total = state.workout.exercises.size
+
+        viewModelScope.launch {
+            workoutSessionRepository.save(
+                WorkoutSessionEntity(
+                    workoutId = state.workout.id,
+                    workoutName = state.workout.name,
+                    workoutType = state.workout.type.name,
+                    difficulty = state.workout.difficulty.name,
+                    completedExercises = total,
+                    totalExercises = total,
+                    isFullyCompleted = true,
+                    timestamp = LocalDateTime.now(),
+                )
+            )
+            onSaved()
+        }
+    }
+
     private fun currentWorkout(): WorkoutUiState? {
         return (_uiState.value as? DataUiState.Populated)?.data
     }

@@ -9,6 +9,7 @@ data class WorkoutCardInfo(
     val difficultyLabel: String,
     val difficultyLevel: Int,
     val exerciseCount: Int,
+    val durationMinutes: Int,
     /** Position of the category in `WorkoutType`; the card marks it with the category color. */
     val typeOrdinal: Int = 0,
 )

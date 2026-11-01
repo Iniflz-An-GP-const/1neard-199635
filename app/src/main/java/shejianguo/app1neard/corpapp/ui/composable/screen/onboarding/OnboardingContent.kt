@@ -1,46 +1,28 @@
 package shejianguo.app1neard.corpapp.ui.composable.screen.onboarding
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.DirectionsRun
-import androidx.compose.material.icons.automirrored.filled.TrendingUp
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.EmojiEvents
-import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.Insights
-import androidx.compose.material.icons.filled.MonitorHeart
-import androidx.compose.material.icons.filled.Timer
-import androidx.compose.ui.graphics.vector.ImageVector
 import shejianguo.app1neard.corpapp.R
 
 data class OnboardingContent(
     @field:StringRes val titleRes: Int,
     @field:StringRes val descriptionRes: Int,
-    val icons: List<ImageVector>,
+    val imageUrl: String,
 )
 
 val onboardingPagesContent = listOf(
     OnboardingContent(
         titleRes = R.string.snpcp_page_expertise_title,
         descriptionRes = R.string.snpcp_page_expertise_description,
-        icons = listOf(Icons.Filled.FitnessCenter, Icons.Filled.Insights),
+        imageUrl = "https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=800&q=80",
     ),
     OnboardingContent(
         titleRes = R.string.snpcp_page_reliability_title,
         descriptionRes = R.string.snpcp_page_reliability_description,
-        icons = listOf(
-            Icons.AutoMirrored.Filled.DirectionsRun,
-            Icons.Filled.Timer,
-            Icons.Filled.MonitorHeart
-        ),
+        imageUrl = "https://images.unsplash.com/photo-1728532483490-708f6562b738?w=800&q=80",
     ),
     OnboardingContent(
         titleRes = R.string.snpcp_page_guarantee_title,
         descriptionRes = R.string.snpcp_page_guarantee_description,
-        icons = listOf(
-            Icons.Filled.EmojiEvents,
-            Icons.AutoMirrored.Filled.TrendingUp,
-            Icons.Filled.CheckCircle
-        ),
+        imageUrl = "https://images.unsplash.com/photo-1632766814518-09285fcc69c2?w=800&q=80",
     ),
 )

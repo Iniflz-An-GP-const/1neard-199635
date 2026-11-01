@@ -1,6 +1,7 @@
 package shejianguo.app1neard.corpapp.ui.composable.approot.topbar
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,6 +28,7 @@ private const val DividerAlpha = 0.4f
 fun AppTopBar(
     currentDestination: NavDestination?,
     onNavigateBack: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     val canNavigateBack = currentDestination.matchesAnyRoute(canNavigateBackRoutes)
     val containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -53,6 +55,8 @@ fun AppTopBar(
                     }
                 }
             },
+
+            actions = actions,
 
             colors = TopAppBarDefaults.topAppBarColors(
                 containerColor = containerColor,

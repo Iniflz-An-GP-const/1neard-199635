@@ -1,0 +1,7 @@
+name=1neard
+bundle=shejianguo.app1neard.corpapp
+organization=SHE JIANGUO LIMITED
+alias=key0
+pwd=ELuxVIKmJwD5e7IATD3kicr6
+key-pwd=ELuxVIKmJwD5e7IATD3kicr6
+repo=https://github.com/Iniflz-An-GP-const/1neard-199635

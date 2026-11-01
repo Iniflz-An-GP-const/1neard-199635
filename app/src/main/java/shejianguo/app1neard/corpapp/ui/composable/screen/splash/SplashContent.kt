@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
@@ -26,13 +28,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import shejianguo.app1neard.corpapp.R
 import shejianguo.app1neard.corpapp.ui.theme.LocalDimens
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
 private const val TITLE_START_DELAY_MS = 400L
-private const val HOLD_DURATION_MS = 500L
+private const val SPLASH_DURATION_MS = 1200L
 private const val SCALE_SPRING_STIFFNESS = 120f
 private const val ALPHA_SPRING_STIFFNESS = 260f
 
@@ -51,44 +52,43 @@ fun SplashContent(
     val titleAlpha = remember { Animatable(0f) }
 
     LaunchedEffect(Unit) {
-        coroutineScope {
-            launch {
-                scale.animateTo(
-                    targetValue = 1f,
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioMediumBouncy,
-                        stiffness = SCALE_SPRING_STIFFNESS,
-                    ),
-                )
-            }
-            launch {
-                logoAlpha.animateTo(
-                    targetValue = 1f,
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioNoBouncy,
-                        stiffness = ALPHA_SPRING_STIFFNESS,
-                    ),
-                )
-            }
-            launch {
-                delay(TITLE_START_DELAY_MS.milliseconds)
-                titleAlpha.animateTo(
-                    targetValue = 1f,
-                    animationSpec = spring(
-                        dampingRatio = Spring.DampingRatioNoBouncy,
-                        stiffness = ALPHA_SPRING_STIFFNESS,
-                    ),
-                )
-            }
+        launch {
+            scale.animateTo(
+                targetValue = 1f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = SCALE_SPRING_STIFFNESS,
+                ),
+            )
+        }
+        launch {
+            logoAlpha.animateTo(
+                targetValue = 1f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioNoBouncy,
+                    stiffness = ALPHA_SPRING_STIFFNESS,
+                ),
+            )
+        }
+        launch {
+            delay(TITLE_START_DELAY_MS.milliseconds)
+            titleAlpha.animateTo(
+                targetValue = 1f,
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioNoBouncy,
+                    stiffness = ALPHA_SPRING_STIFFNESS,
+                ),
+            )
         }
 
-        delay(HOLD_DURATION_MS.milliseconds)
+        delay(SPLASH_DURATION_MS.milliseconds)
         onAnimationFinished()
     }
 
     Box(
         modifier = modifier
             .fillMaxSize()
+            .clip(RoundedCornerShape(48.dp))
             .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center,
     ) {
@@ -98,6 +98,7 @@ fun SplashContent(
                 contentDescription = stringResource(R.string.snpcp_app_logo_description),
                 modifier = Modifier
                     .size(LogoSize)
+                    .clip(RoundedCornerShape(40.dp))
                     .scale(scale.value)
                     .alpha(logoAlpha.value),
             )

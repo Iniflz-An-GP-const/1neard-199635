@@ -6,6 +6,7 @@ import androidx.compose.ui.res.stringResource
 import shejianguo.app1neard.corpapp.data.model.WorkoutModel
 import shejianguo.app1neard.corpapp.ui.composable.screen.home.workoutcard.content.WorkoutCardContent
 import shejianguo.app1neard.corpapp.ui.composable.screen.home.workoutcard.shell.WorkoutCardShell
+import shejianguo.app1neard.corpapp.ui.state.estimatedMinutes
 
 @Composable
 fun WorkoutCard(
@@ -20,6 +21,7 @@ fun WorkoutCard(
         difficultyLabel = stringResource(workout.difficulty.titleRes),
         difficultyLevel = workout.difficulty.level,
         exerciseCount = workout.exercises.size,
+        durationMinutes = workout.estimatedMinutes(),
         typeOrdinal = workout.type.ordinal,
     )
 

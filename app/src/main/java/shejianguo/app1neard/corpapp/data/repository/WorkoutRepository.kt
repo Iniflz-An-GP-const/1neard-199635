@@ -21,7 +21,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.BEGINNER,
             type = WorkoutType.STRENGTH,
-            imageUrl = "https://images.pexels.com/photos/6496107/pexels-photo-6496107.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1649887974297-4be052375a67?w=800&q=80",
         ),
         WorkoutModel(
             id = 2,
@@ -34,7 +34,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.BEGINNER,
             type = WorkoutType.CORE,
-            imageUrl = "https://images.pexels.com/photos/6193550/pexels-photo-6193550.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1571019613531-fbeaeb790845?w=800&q=80",
         ),
         WorkoutModel(
             id = 3,
@@ -47,7 +47,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.INTERMEDIATE,
             type = WorkoutType.UPPER_BODY,
-            imageUrl = "https://images.pexels.com/photos/7592988/pexels-photo-7592988.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1509411627497-1f19a8db1854?w=800&q=80",
         ),
         WorkoutModel(
             id = 4,
@@ -60,7 +60,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.INTERMEDIATE,
             type = WorkoutType.HIIT,
-            imageUrl = "https://images.pexels.com/photos/6740315/pexels-photo-6740315.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1606903037631-f09fd0bd74b4?w=800&q=80",
         ),
         WorkoutModel(
             id = 5,
@@ -73,7 +73,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.INTERMEDIATE,
             type = WorkoutType.STRENGTH,
-            imageUrl = "https://images.pexels.com/photos/5000219/pexels-photo-5000219.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1571019613914-85f342c6a11e?w=800&q=80",
         ),
         WorkoutModel(
             id = 6,
@@ -86,7 +86,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.ADVANCED,
             type = WorkoutType.CORE,
-            imageUrl = "https://images.pexels.com/photos/8032753/pexels-photo-8032753.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1514512364185-4c2b0985be01?w=800&q=80",
         ),
         WorkoutModel(
             id = 7,
@@ -100,7 +100,7 @@ class WorkoutRepository {
             ),
             difficulty = Difficulty.ADVANCED,
             type = WorkoutType.HIIT,
-            imageUrl = "https://images.pexels.com/photos/4148959/pexels-photo-4148959.jpeg",
+            imageUrl = "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800&q=80",
         ),
     )
 

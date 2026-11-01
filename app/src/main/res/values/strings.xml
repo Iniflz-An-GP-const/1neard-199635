@@ -60,7 +60,7 @@
 
     <!-- controls -->
     <string name="next_button_title">Next</string>
-    <string name="start_button_title">Start</string>
+    <string name="start_button_title">Get Started</string>
     <string name="skip_button_title">Skip</string>
     <!-- %1$s – button label (Next/Start), %2$d and %3$d – current page number and total number of pages. -->
     <string name="onboarding_button_progress">%1$s · %2$d/%3$d</string>
@@ -199,4 +199,40 @@
 
     <string name="profile_screen_contact_label">Contact</string>
     <string name="snpcp_customer_support_link" translatable="false">http://she-jianguo-trade.xyz</string>
+
+    <!-- added screens: home meta, workout details, history, statistics, profile, settings -->
+    <string name="snpcp_top_bar_settings_title">Settings</string>
+    <string name="home_filter_icon_description">Filters</string>
+    <string name="workout_card_meta">%1$d min · %2$d exercises</string>
+    <string name="workout_info_duration">%1$d min</string>
+    <string name="exercise_rest_format">Rest %1$ds</string>
+    <string name="mark_completed_dialog_title">Mark workout as completed?</string>
+    <string name="mark_completed_dialog_message">It will be saved to your history and statistics.</string>
+    <string name="mark_completed_dialog_confirm">Confirm</string>
+    <string name="history_empty">Complete your first workout!</string>
+    <string name="history_date_today">Today</string>
+    <string name="history_date_yesterday">Yesterday</string>
+    <string name="history_summary_total">Total Workouts</string>
+    <string name="history_summary_streak">Day Streak</string>
+    <string name="statistics_total_workouts">Total Workouts</string>
+    <string name="statistics_total_hours">Total Hours</string>
+    <string name="statistics_favorite_type">Favorite Type</string>
+    <string name="statistics_weekly_activity">Active Days</string>
+    <string name="statistics_weekly_activity_format">%1$d/7</string>
+    <string name="statistics_no_favorite" translatable="false">—</string>
+    <string name="statistics_weekly_chart_title">This Week</string>
+    <string name="statistics_motivation_title">Keep Going</string>
+    <string name="statistics_motivation_start">Every journey starts with one workout. Pick one and get moving today!</string>
+    <string name="statistics_motivation_progress">Nice work! Train a few more days this week to build your rhythm.</string>
+    <string name="statistics_motivation_strong">You\'re on fire! Your consistency is paying off — keep it up.</string>
+    <string name="profile_default_name">Athlete</string>
+    <string name="profile_details_section_title">Your Details</string>
+    <string name="profile_name_label">Name</string>
+    <string name="profile_age_label">Age</string>
+    <string name="profile_fitness_level_label">Fitness Level</string>
+    <string name="profile_save_button">Save</string>
+    <string name="profile_settings_link">Settings</string>
+    <string name="profile_stat_workouts">Workouts</string>
+    <string name="profile_stat_hours">Hours</string>
+    <string name="profile_stat_days_active">Days Active</string>
 </resources>

@@ -2,37 +2,35 @@ package shejianguo.app1neard.corpapp.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import shejianguo.app1neard.corpapp.data.entity.WorkoutSessionEntity
+import shejianguo.app1neard.corpapp.data.repository.WorkoutRepository
 import shejianguo.app1neard.corpapp.data.repository.WorkoutSessionRepository
-import shejianguo.app1neard.corpapp.ui.state.DataUiState
-import shejianguo.app1neard.corpapp.ui.state.WorkoutFilterMode
-import kotlinx.coroutines.flow.MutableStateFlow
+import shejianguo.app1neard.corpapp.ui.state.SessionEntryUi
+import shejianguo.app1neard.corpapp.ui.state.estimatedMinutes
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 
 class StatisticsViewModel(
     private val workoutSessionRepository: WorkoutSessionRepository,
+    private val workoutRepository: WorkoutRepository,
 ) : ViewModel() {
-    private val _chartMode = MutableStateFlow(WorkoutFilterMode.TYPE)
-    val chartMode: StateFlow<WorkoutFilterMode>
-        get() = _chartMode.asStateFlow()
 
-    val sessionsState: StateFlow<DataUiState<List<WorkoutSessionEntity>>> =
+    /** Every saved session with the length of its workout; empty until the first workout. */
+    val entries: StateFlow<List<SessionEntryUi>> =
         workoutSessionRepository.observeAll()
-            .map { sessions -> DataUiState.from(sessions) }
+            .map { sessions ->
+                sessions.map { session ->
+                    SessionEntryUi(
+                        session = session,
+                        durationMinutes = workoutRepository.getById(session.workoutId)
+                            ?.estimatedMinutes() ?: 0,
+                    )
+                }
+            }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = DataUiState.Initial,
+                initialValue = emptyList(),
             )
-
-    fun onChartModeToggled() {
-        _chartMode.update { mode ->
-            if (mode == WorkoutFilterMode.TYPE) WorkoutFilterMode.DIFFICULTY else WorkoutFilterMode.TYPE
-        }
-    }
 }

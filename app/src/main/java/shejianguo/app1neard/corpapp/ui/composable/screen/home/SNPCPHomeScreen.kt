@@ -1,5 +1,10 @@
 package shejianguo.app1neard.corpapp.ui.composable.screen.home
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -31,7 +36,6 @@ import shejianguo.app1neard.corpapp.ui.composable.screen.shared.DataEmptyContent
 import shejianguo.app1neard.corpapp.ui.composable.screen.shared.listmotion.LocalPlayedEntrances
 import shejianguo.app1neard.corpapp.ui.composable.screen.shared.listmotion.listEntrance
 import shejianguo.app1neard.corpapp.ui.state.DataUiState
-import shejianguo.app1neard.corpapp.ui.state.WorkoutFilterMode
 import shejianguo.app1neard.corpapp.ui.theme.ControlDivider
 import shejianguo.app1neard.corpapp.ui.theme.LocalDimens
 import shejianguo.app1neard.corpapp.ui.viewmodel.HomeViewModel
@@ -39,27 +43,22 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SNPCPHomeScreen(
+    showFilters: Boolean,
     onWorkoutClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
     val workoutsState by viewModel.workoutsState.collectAsStateWithLifecycle()
-    val filterMode by viewModel.filterMode.collectAsStateWithLifecycle()
     val selectedType by viewModel.selectedType.collectAsStateWithLifecycle()
     val selectedDifficulty by viewModel.selectedDifficulty.collectAsStateWithLifecycle()
-    val weeklyGoal by viewModel.weeklyGoal.collectAsStateWithLifecycle()
-    val weeklyProgress by viewModel.weeklyProgress.collectAsStateWithLifecycle()
     val tips by viewModel.tips.collectAsStateWithLifecycle()
 
     HomeContent(
         workoutsState = workoutsState,
-        filterMode = filterMode,
+        showFilters = showFilters,
         selectedType = selectedType,
         selectedDifficulty = selectedDifficulty,
-        weeklyGoal = weeklyGoal,
-        weeklyProgress = weeklyProgress,
         tips = tips,
-        onFilterModeToggled = viewModel::onFilterModeToggled,
         onTypeSelected = viewModel::onTypeSelected,
         onDifficultySelected = viewModel::onDifficultySelected,
         onWorkoutClick = onWorkoutClick,
@@ -70,13 +69,10 @@ fun SNPCPHomeScreen(
 @Composable
 private fun HomeContent(
     workoutsState: DataUiState<List<WorkoutModel>>,
-    filterMode: WorkoutFilterMode,
+    showFilters: Boolean,
     selectedType: WorkoutType?,
     selectedDifficulty: Difficulty?,
-    weeklyGoal: Int,
-    weeklyProgress: Int,
     tips: List<TipModel>,
-    onFilterModeToggled: () -> Unit,
     onTypeSelected: (WorkoutType?) -> Unit,
     onDifficultySelected: (Difficulty?) -> Unit,
     onWorkoutClick: (Int) -> Unit,
@@ -91,13 +87,10 @@ private fun HomeContent(
 
             WorkoutsList(
                 workouts = workouts,
-                filterMode = filterMode,
+                showFilters = showFilters,
                 selectedType = selectedType,
                 selectedDifficulty = selectedDifficulty,
-                weeklyGoal = weeklyGoal,
-                weeklyProgress = weeklyProgress,
                 tips = tips,
-                onFilterModeToggled = onFilterModeToggled,
                 onTypeSelected = onTypeSelected,
                 onDifficultySelected = onDifficultySelected,
                 onWorkoutClick = onWorkoutClick,
@@ -116,13 +109,10 @@ private fun HomeContent(
 @Composable
 private fun WorkoutsList(
     workouts: List<WorkoutModel>,
-    filterMode: WorkoutFilterMode,
+    showFilters: Boolean,
     selectedType: WorkoutType?,
     selectedDifficulty: Difficulty?,
-    weeklyGoal: Int,
-    weeklyProgress: Int,
     tips: List<TipModel>,
-    onFilterModeToggled: () -> Unit,
     onTypeSelected: (WorkoutType?) -> Unit,
     onDifficultySelected: (Difficulty?) -> Unit,
     onWorkoutClick: (Int) -> Unit,
@@ -148,29 +138,29 @@ private fun WorkoutsList(
             ),
             verticalArrangement = Arrangement.spacedBy(dimens.contentSpacing),
         ) {
-            homeTopSection(
-                tips = tips,
-                weeklyGoal = weeklyGoal,
-                weeklyProgress = weeklyProgress,
-            )
+            homeTopSection(tips = tips)
 
             stickyHeader {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.surfaceContainer),
+                AnimatedVisibility(
+                    visible = showFilters,
+                    enter = expandVertically() + fadeIn(),
+                    exit = shrinkVertically() + fadeOut(),
                 ) {
-                    WorkoutFilterRow(
-                        modifier = Modifier.padding(vertical = dimens.tightSpacing),
-                        filterMode = filterMode,
-                        selectedType = selectedType,
-                        selectedDifficulty = selectedDifficulty,
-                        onFilterModeToggled = onFilterModeToggled,
-                        onTypeSelected = onTypeSelected,
-                        onDifficultySelected = onDifficultySelected,
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.surfaceContainer),
+                    ) {
+                        WorkoutFilterRow(
+                            modifier = Modifier.padding(vertical = dimens.tightSpacing),
+                            selectedType = selectedType,
+                            selectedDifficulty = selectedDifficulty,
+                            onTypeSelected = onTypeSelected,
+                            onDifficultySelected = onDifficultySelected,
+                        )
 
-                    ControlDivider()
+                        ControlDivider()
+                    }
                 }
             }
 

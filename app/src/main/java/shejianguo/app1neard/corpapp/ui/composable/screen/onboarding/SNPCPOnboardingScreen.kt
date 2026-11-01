@@ -1,7 +1,6 @@
 package shejianguo.app1neard.corpapp.ui.composable.screen.onboarding
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -69,19 +68,7 @@ private fun OnboardingPager(
             pageFraction = { pagerState.currentPage + pagerState.currentPageOffsetFraction },
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    start = dimens.screenPadding,
-                    top = dimens.screenPadding,
-                    end = dimens.screenPadding,
-                    // The screen has neither its own bottom bar nor a shared one
-                    // (bottomBarHiddenScreens), so the button must be offset
-                    // from the system navigation bar manually.
-                    bottom = dimens.screenPadding + LocalContentBottomPadding.current,
-                ),
-        ) {
+        Column(modifier = Modifier.fillMaxSize()) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
@@ -110,6 +97,14 @@ private fun OnboardingPager(
                         }
                     }
                 },
+                modifier = Modifier.padding(
+                    start = dimens.screenPadding,
+                    end = dimens.screenPadding,
+                    // The screen has neither its own bottom bar nor a shared one
+                    // (bottomBarHiddenScreens), so the button must be offset
+                    // from the system navigation bar manually.
+                    bottom = dimens.screenPadding + LocalContentBottomPadding.current,
+                ),
             )
         }
     }
@@ -123,12 +118,11 @@ private fun OnboardingPage(
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
     ) {
         OnboardingPageContent(
             title = stringResource(content.titleRes),
             description = stringResource(content.descriptionRes),
-            icons = content.icons,
+            imageUrl = content.imageUrl,
         )
     }
 }
